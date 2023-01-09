@@ -10,9 +10,23 @@ public class ArrayListNotes
 {
     public static void main(String[] args)
     {
-        
+        /*
+         * The ArrayList is a Java Generic.
+         * 
+         *  We have to specify the class type of the elements in the list in angle
+         *      brackets (i.e., < >) after every ArrayList identifier.
+         * 
+         *  Primitives (e.g., int, double, boolean) are not classes and cannot be
+         *      specified as the type of the element in a generic. Instead, we can
+         *      use the corresponding Wrapper Classes (e.g., Integer, Double, Boolean).
+         */
+        ArrayList<Integer> myList;
+        myList = createRandomIntegerList(10, 20);
+        System.out.println(myList);
+        removeEvens(myList);
+        System.out.println(myList);
     }
-    
+
     /**
      * Creates and returns a reference to an ArrayList of the specified number of
      *      Integer elements where each element is assigned a random value between
@@ -25,10 +39,25 @@ public class ArrayListNotes
      */
     public static ArrayList<Integer> createRandomIntegerList(int size, int range)
     {
-        return null;
+        ArrayList<Integer> list = new ArrayList<Integer>();
+
+        for(int i = 0; i < size; i++)
+        {
+            int value = (int)(Math.random() * range) + 1;
+
+            /*
+             * The add method adds the specified object to the end of the list.
+             * 
+             * Autoboxing:
+             *      Primitive values are automatically converted to their corresponding
+             *          wrapper class. However, type promotion does not occur.
+             */
+            list.add(value);
+        }
+
+        return list;
     }
-    	 
-    
+
     /**
      * Removes even numbers from the specified list.
      * 
@@ -36,19 +65,35 @@ public class ArrayListNotes
      */
     public static void removeEvens(ArrayList<Integer> list)
     {
-    	
+        /*
+         * The size method returns the number of elements in the list.
+         */
+        for(int i = 0; i < list.size(); i++)
+        {
+            /* 
+             * The get method returns the value of the element at the specified index.
+             */
+            int value = list.get(i);
+            if(value % 2 == 0)
+            {
+                /*
+                 * The remove method deletes the element at the specified index.
+                 */
+                list.remove(i);
+                i--;
+            }
+        }
     }
-    
+
     public static void removeEvensAlt(ArrayList<Integer> list)
     {
-        
+
     }
-    
+
     public static int sumList(ArrayList<Integer> list)
     {
         int sum = 0;
-        
-        
+
         
         return sum;
     }
