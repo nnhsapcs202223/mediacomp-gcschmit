@@ -25,6 +25,7 @@ public class ArrayListNotes
         System.out.println(myList);
         removeEvens(myList);
         System.out.println(myList);
+        System.out.println(sumList(myList));
     }
     
     /**
@@ -89,14 +90,32 @@ public class ArrayListNotes
     
     public static void removeEvensAlt(ArrayList<Integer> list)
     {
-        
+        for(int i = list.size() - 1; i >= 0; i--)
+        {
+            if(list.get(i) % 2 == 0)
+            {
+                list.remove(i);
+            }
+        }
     }
     
     public static int sumList(ArrayList<Integer> list)
     {
         int sum = 0;
         
-        
+        /*
+         * Enhanced for loops support iterating through ArrayLists
+         */
+        for(int value : list)
+        {
+            sum += value;
+            
+            /*
+             *  Modifying the list (add, remove) inside an enhanced for loop
+             *      generates a concurrent modification exception
+             */
+            //list.add(7);
+        }
         
         return sum;
     }
