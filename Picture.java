@@ -174,7 +174,7 @@ public class Picture extends SimplePicture
      * 
      * precondition: this picture and all pictures in the list have the same number of rows and cols
      */
-    void averagePics(ArrayList<Picture> pictures)
+    public void averagePics(ArrayList<Picture> pictures)
     {
         
     }
@@ -195,7 +195,7 @@ public class Picture extends SimplePicture
      *    
      * @precondition The destination Picture object must be large enough to fit the copied Picture.
      */
-    void cropAndCopy( Picture sourcePicture, int startSourceRow, int endSourceRow,
+    public void cropAndCopy( Picture sourcePicture, int startSourceRow, int endSourceRow,
     int startSourceCol, int endSourceCol, int startDestRow, int startDestCol )
     {
 
