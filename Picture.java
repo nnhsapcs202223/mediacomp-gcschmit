@@ -177,7 +177,38 @@ public class Picture extends SimplePicture
      */
     void averagePics(ArrayList<Picture> pictures)
     {
+        ArrayList<Pixel[][]> picturesPixels = new ArrayList<Pixel[][]>();
         
+        for(Picture picture : pictures)
+        {
+            Pixel[][] pixels = picture.getPixels2D();
+            picturesPixels.add(pixels);
+        }
+        
+        Pixel[][] destPixels = this.getPixels2D();
+        
+        for(int row = 0; row < destPixels.length; row++)
+        {
+            for(int col = 0; col < destPixels[row].length; col++)
+            {
+                int redSum = 0;
+                int greenSum = 0;
+                int blueSum = 0;
+                
+                for(Pixel[][] srcPixels : picturesPixels)
+                {
+                    Pixel srcPixel = srcPixels[row][col];
+                    redSum += srcPixel.getRed();
+                    greenSum += srcPixel.getGreen();
+                    blueSum += srcPixel.getBlue();
+                }
+                
+                Pixel destPixel = destPixels[row][col];
+                destPixel.setRed(redSum / picturesPixels.size());
+                destPixel.setGreen(greenSum / picturesPixels.size());
+                destPixel.setBlue(blueSum / picturesPixels.size());
+            }
+        }
     }
 
     /**
