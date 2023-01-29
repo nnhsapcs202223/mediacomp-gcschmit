@@ -167,6 +167,7 @@ public class Picture extends SimplePicture
             }
         }
     }
+
     /**
      * Sets each pixel in this picture to the average of the corresponding pixels in the specified
      *      list of pictures.
@@ -177,36 +178,39 @@ public class Picture extends SimplePicture
      */
     void averagePics(ArrayList<Picture> pictures)
     {
-        ArrayList<Pixel[][]> picturesPixels = new ArrayList<Pixel[][]>();
-        
+        int[][] redPixelsSum = new int[this.getHeight()][this.getWidth()];
+        int[][] greenPixelsSum = new int[this.getHeight()][this.getWidth()];
+        int[][] bluePixelsSum = new int[this.getHeight()][this.getWidth()];
+
+        Pixel[][] destPixels = this.getPixels2D();
+
         for(Picture picture : pictures)
         {
-            Pixel[][] pixels = picture.getPixels2D();
-            picturesPixels.add(pixels);
+            Pixel[][] srcPixels = picture.getPixels2D();
+
+            for(int row = 0; row < destPixels.length; row++)
+            {
+                for(int col = 0; col < destPixels[row].length; col++)
+                {
+
+                    Pixel srcPixel = srcPixels[row][col];
+                    redPixelsSum[row][col] += srcPixel.getRed();
+                    greenPixelsSum[row][col] += srcPixel.getGreen();
+                    bluePixelsSum[row][col] += srcPixel.getBlue();
+
+                
+                }
+            }
         }
-        
-        Pixel[][] destPixels = this.getPixels2D();
-        
+
         for(int row = 0; row < destPixels.length; row++)
         {
             for(int col = 0; col < destPixels[row].length; col++)
             {
-                int redSum = 0;
-                int greenSum = 0;
-                int blueSum = 0;
-                
-                for(Pixel[][] srcPixels : picturesPixels)
-                {
-                    Pixel srcPixel = srcPixels[row][col];
-                    redSum += srcPixel.getRed();
-                    greenSum += srcPixel.getGreen();
-                    blueSum += srcPixel.getBlue();
-                }
-                
                 Pixel destPixel = destPixels[row][col];
-                destPixel.setRed(redSum / picturesPixels.size());
-                destPixel.setGreen(greenSum / picturesPixels.size());
-                destPixel.setBlue(blueSum / picturesPixels.size());
+                destPixel.setRed(redPixelsSum[row][col] / pictures.size());
+                destPixel.setGreen(greenPixelsSum[row][col] / pictures.size());
+                destPixel.setBlue(bluePixelsSum[row][col] / pictures.size());
             }
         }
     }
